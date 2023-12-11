@@ -58,9 +58,9 @@ function draw() {
       blueY = wallY;
     } else if (downKey) {
       blueY = wallY - 35;
-    } else if (leftKey) {
+    } else if (leftArrow) {
       blueX = wallX + 200;
-    } else if (rightKey) {
+    } else if (rightArrow) {
       blueX = wallX - 35;
     }
   }
