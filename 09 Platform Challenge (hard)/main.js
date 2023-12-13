@@ -54,14 +54,15 @@ function draw() {
     player.y < wallY + 40 &&
     player.y + 35 > wallY
   ) {
-    if (player.y + 35 < wallY) {
-      blueY = wallY;
-    } else if (downKey) {
-      blueY = wallY - 35;
+    if (player.y + 35 > wallY) {
+      player.y = wallY - 35;
+      player.dy = 0;
+    } else if (player.y < wallY + 40) {
+      player.y = wallY - 40;
     } else if (leftArrow) {
-      blueX = wallX + 200;
+      player.x = wallX + 200;
     } else if (rightArrow) {
-      blueX = wallX - 35;
+      player.x = wallX - 35;
     }
   }
 
