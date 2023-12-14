@@ -33,37 +33,49 @@ function draw() {
   // Horizontal Movement
   if (rightArrow) {
     player.x += player.dx;
+    // Stop at right edge of platform
+    if (
+      player.x < wallX + 200 &&
+      player.x + 35 > wallX &&
+      player.y < wallY + 40 &&
+      player.y + 35 > wallY
+    )
+      [(player.x = wallX - 35)];
   } else if (leftArrow) {
     player.x += -player.dx;
+    // Stop at left edge of platform
+    if (
+      player.x < wallX + 200 &&
+      player.x + 35 > wallX &&
+      player.y < wallY + 40 &&
+      player.y + 35 > wallY
+    )
+      [(player.x = wallX + 200)];
   }
 
   // Vertical Movement
   player.dy += player.a;
   player.y += player.dy;
-
-  // Land on Ground
-  if (player.y + player.h > cnv.height) {
-    player.y = cnv.height - player.h;
-    player.dy = 0;
-  }
-
-  // Stop at Wall
+  // Stop at top and bottom of platform
   if (
     player.x < wallX + 200 &&
     player.x + 35 > wallX &&
     player.y < wallY + 40 &&
     player.y + 35 > wallY
   ) {
-    if (player.y + 35 > wallY) {
+    if (player.dy > 0) {
       player.y = wallY - 35;
       player.dy = 0;
-    } else if (player.y < wallY + 40) {
-      player.y = wallY - 40;
-    } else if (leftArrow) {
-      player.x = wallX + 200;
-    } else if (rightArrow) {
-      player.x = wallX - 35;
+    } else if (player.dy < 0) {
+      player.y = wallY + 40;
+      player.dy = 0;
     }
+  }
+
+  // Land on Ground
+  if (player.y + player.h > cnv.height) {
+    player.y = cnv.height - player.h;
+    player.dy = 0;
   }
 
   // Draw Background
